@@ -9,6 +9,11 @@ final class LoggerTests: XCTestCase {
 		
 		Log(true, "bullseye")
 		Log(true, "scoping", "scrying", 12)
+
+	}
+
+	func testBasicLabel() {
+		
 		Label("targetting")
 		Label(12, "discovering")
 
@@ -91,6 +96,7 @@ final class LoggerTests: XCTestCase {
 	
     static var allTests = [
         ("testBasicLog", testBasicLog),
+        ("testBasicLabel", testBasicLabel),
 		("testErrorLog", testErrorLog),
 		("testLoggerLevel", testLoggerLevel),
 		("testLevelLogs", testGlobalLogs),
