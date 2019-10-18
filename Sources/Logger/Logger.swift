@@ -9,31 +9,6 @@
 import Foundation
 import os.log
 
-//
-//	Simplistic Logger
-//
-//	usage:
-//		Logger.Level = .WARNING
-//
-//		Logger.debug("sayit")
-//		Logger.info("sayit")
-//		Logger.warning("sayit")
-//		Logger.error("sayit")
-//		Logger.fatal("sayit")
-//
-//		let logger:Logger = .FATAL
-//
-//		logger.debug("sayitagain")
-//		logger.info("sayitagain")
-//		logger.warning("sayitagain")
-//		logger.error("sayitagain")
-//		logger.fatal("sayitagain")
-//
-//  NOTE:
-//
-//      setting Logger.Level = .OFF will turn off ALL logging through 
-//      this class/functionality
-//
 public
 enum Logger:Int {
 	case all = 0
