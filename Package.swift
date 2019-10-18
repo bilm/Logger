@@ -5,7 +5,6 @@ import PackageDescription
 
 let package = Package(
 	name: "Logger",
-	platforms: [ .iOS(.v13), .macOS(.v10_14) ],
 	products: [
 		.library(name: "Logger", targets: ["Logger"]),
 	],

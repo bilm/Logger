@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import os.log
 
 public
 enum Logger:Int {
@@ -25,56 +24,56 @@ enum Logger:Int {
 extension Logger {
 	public
 	static
-	func debug(_ message:Any..., oslog:OSLog? = nil, function: String = #function) {
-		Level.debug(message:message, oslog:oslog, function:function)
+	func debug(_ message:Any..., function: String = #function) {
+		Level.debug(message:message, function:function)
 	}
 	public
-	func debug(_ message:Any..., oslog:OSLog? = nil, function: String = #function) {
-		debug(message:message, oslog:oslog, function:function)
-	}
-	
-	
-	public
-	static
-	func info(_ message:Any..., oslog:OSLog? = nil, function: String = #function) {
-		Level.info(message:message, oslog:oslog, function:function)
-	}
-	public
-	func info(_ message:Any..., oslog:OSLog? = nil, function: String = #function) {
-		info(message:message, oslog:oslog, function:function)
+	func debug(_ message:Any..., function: String = #function) {
+		debug(message:message, function:function)
 	}
 	
 	
 	public
 	static
-	func warning(_ message:Any..., oslog:OSLog? = nil, function: String = #function) {
-		Level.warning(message:message, oslog:oslog, function:function)
+	func info(_ message:Any..., function: String = #function) {
+		Level.info(message:message, function:function)
 	}
 	public
-	func warning(_ message:Any..., oslog:OSLog? = nil, function: String = #function) {
-		warning(message:message, oslog:oslog, function:function)
-	}
-	
-	
-	public
-	static
-	func error(_ message:Any..., oslog:OSLog? = nil, function: String = #function) {
-		Level.error(message:message, oslog:oslog, function:function)
-	}
-	public
-	func error(_ message:Any..., oslog:OSLog? = nil, function: String = #function) {
-		error(message:message, oslog:oslog, function:function)
+	func info(_ message:Any..., function: String = #function) {
+		info(message:message, function:function)
 	}
 	
 	
 	public
 	static
-	func fatal(_ message:Any..., oslog:OSLog? = nil, function: String = #function) {
-		Level.fatal(message:message, oslog:oslog, function:function)
+	func warning(_ message:Any..., function: String = #function) {
+		Level.warning(message:message, function:function)
 	}
 	public
-	func fatal(_ message:Any..., oslog:OSLog? = nil, function: String = #function) {
-		fatal(message:message, oslog:oslog, function:function)
+	func warning(_ message:Any..., function: String = #function) {
+		warning(message:message, function:function)
+	}
+	
+	
+	public
+	static
+	func error(_ message:Any..., function: String = #function) {
+		Level.error(message:message, function:function)
+	}
+	public
+	func error(_ message:Any..., function: String = #function) {
+		error(message:message, function:function)
+	}
+	
+	
+	public
+	static
+	func fatal(_ message:Any..., function: String = #function) {
+		Level.fatal(message:message, function:function)
+	}
+	public
+	func fatal(_ message:Any..., function: String = #function) {
+		fatal(message:message, function:function)
 	}
 	
 }
@@ -86,33 +85,33 @@ extension Logger: Comparable {
 
 extension Logger {
 	private
-	func debug(message:[Any], oslog:OSLog? = nil, function: String = #function) {
+	func debug(message:[Any], function: String = #function) {
 		if case .off = Logger.Level { return }
-		Log(self <= .DEBUG, message:message, tag:"DEBUG", oslog:oslog, oslogtype:.debug, function:function)
+		Log(self <= .DEBUG, message:message, tag:"DEBUG", function:function)
 	}
 	
 	private
-	func info(message:[Any], oslog:OSLog? = nil, function: String = #function) {
+	func info(message:[Any], function: String = #function) {
 		if case .off = Logger.Level { return }
-		Log(self <= .INFO, message:message, tag:"INFO", oslog:oslog, oslogtype:.info, function:function)
+		Log(self <= .INFO, message:message, tag:"INFO", function:function)
 	}
 	
 	private
-	func warning(message:[Any], oslog:OSLog? = nil, function: String = #function) {
+	func warning(message:[Any], function: String = #function) {
 		if case .off = Logger.Level { return }
-		Log(self <= .WARNING, message:message, tag:"WARNING", oslog:oslog, oslogtype:.`default`, function:function)
+		Log(self <= .WARNING, message:message, tag:"WARNING", function:function)
 	}
 	
 	private
-	func error(message:[Any], oslog:OSLog? = nil, function: String = #function) {
+	func error(message:[Any], function: String = #function) {
 		if case .off = Logger.Level { return }
-		Log(self <= .ERROR, message:message, tag:"ERROR", oslog:oslog, oslogtype:.error, function:function)
+		Log(self <= .ERROR, message:message, tag:"ERROR", function:function)
 	}
 	
 	private
-	func fatal(message:[Any], oslog:OSLog? = nil, function: String = #function) {
+	func fatal(message:[Any], function: String = #function) {
 		if case .off = Logger.Level { return }
-		Log(self <= .FATAL, message:message, tag:"FATAL", oslog:oslog, oslogtype:.fault, function:function)
+		Log(self <= .FATAL, message:message, tag:"FATAL", function:function)
 	}
 	
 }

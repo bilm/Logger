@@ -58,14 +58,6 @@ final class LoggerTests: XCTestCase {
 		
 	}
 	
-	func testUsingOSLog() {
-		
-		Logger.warning("sayit", "oslog", oslog:.loggerTests("test"))
-		Logger.error("demoIt", oslog:.loggerTests("demo"))
-		Logger.info("displayIt", oslog:.loggerTests("demo"))
-
-	}
-	
 	func testRequiredLevelSuccess() {
 		
 		let logger:Logger = .FATAL
@@ -94,26 +86,4 @@ final class LoggerTests: XCTestCase {
 		}
 	}
 	
-    static var allTests = [
-        ("testBasicLog", testBasicLog),
-        ("testBasicLabel", testBasicLabel),
-		("testErrorLog", testErrorLog),
-		("testLoggerLevel", testLoggerLevel),
-		("testLevelLogs", testGlobalLogs),
-		("testLocalLogs", testLocalLogs),
-		("testUsingOSLog", testUsingOSLog),
-		("testRequiredLevelSuccess", testRequiredLevelSuccess),
-		("testRequiredLevelFailure", testRequiredLevelFailure),
-    ]
-	
 }
-
-extension OSLog {
-	
-	public
-	static
-	func loggerTests(_ category:String) ->OSLog {
-		OSLog(subsystem: "com.lsi.logger.tests", category: category)
-	}
-}
-

@@ -79,19 +79,6 @@ struct BasicLogging {
 BasicLogging.test()
 ```
 
-## Using OSLog
-```swift
-extension OSLog {
-	public static func playground(_ category:String) ->OSLog {
-		return OSLog(subsystem: "com.lsi.playground", category: category)
-	}
-}
-
-Logger.warning("sayit", "oslog", oslog:.playground("test"))
-Logger.error("demoIt", oslog:.playground("demo"))
-Logger.info("displayIt", oslog:.playground("demo"))
-```
-
 ## Requiring a minimal level
 _the main reason for this is when we are debugging and do not want side effects to occur when the level is higher than what is required._
 ```swift
