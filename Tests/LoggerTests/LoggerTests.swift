@@ -5,6 +5,22 @@ import os.log
 
 final class LoggerTests: XCTestCase {
     
+	override func setUp() {
+
+		Logger[Something.self] = .WARNING
+		
+		UserDefaults.standard
+			.register(defaults: [
+				"logger": "INFO",
+				"logger.Other":"FATAL",
+			])
+	}
+	
+	override class func tearDown() {
+		Logger.remove(Something.self)
+		Logger.remove(Other.self)
+	}
+	
 	func testBasicLog() {
 		
 		Log(true, "bullseye")
@@ -30,6 +46,9 @@ final class LoggerTests: XCTestCase {
 	}
 
 	func testLoggerLevel() {
+		
+		let saved = Logger.Level
+		defer { Logger.Level = saved }
 		
 		Logger.Level = .WARNING
 		print(Logger.Level)
@@ -94,6 +113,17 @@ final class LoggerTests: XCTestCase {
 		}
 	}
 	
+	struct Something {}
+	struct Other {}
+	func testPerType() {
+		
+		XCTAssertEqual(Logger[ Something.self ], .WARNING)
+
+		XCTAssertNotEqual(Logger[ Other.self ], .Level)
+		XCTAssertEqual(Logger[ Other.self ], .INFO)
+
+	}
+	
     static var allTests = [
         ("testBasicLog", testBasicLog),
         ("testBasicLabel", testBasicLabel),
@@ -110,10 +140,9 @@ final class LoggerTests: XCTestCase {
 
 extension OSLog {
 	
-	public
-	static
-	func loggerTests(_ category:String) ->OSLog {
+	public static func loggerTests(_ category:String) ->OSLog {
 		OSLog(subsystem: "com.lsi.logger.tests", category: category)
 	}
+	
 }
 

@@ -126,3 +126,87 @@ extension Logger {
 	}
 	
 }
+
+extension Logger {
+	
+	public init(named name: String) {
+
+		switch name.uppercased() {
+		case "ALL":		self = .all
+		case "DEBUG":	self = .DEBUG
+		case "INFO":	self = .INFO
+		case "WARNING":	self = .WARNING
+		case "ERROR":	self = .ERROR
+		case "FATAL":	self = .FATAL
+		case "OFF":		self = .off
+		default:		self = .all
+		}
+
+	}
+
+//	public static subscript(type: Any.Type) ->Logger {
+//		
+//		func lookup(_ key: String) ->String? {
+//			ProcessInfo.processInfo.environment[key]
+//			?? UserDefaults.standard.string(forKey: key)
+//		}
+//		
+//		do {
+//			let tName = String(reflecting:type)
+//			if let lggr = lookup("\(tName).logger").map( { Logger(named: $0) } ) {
+//				return lggr
+//			}
+//		
+//			let table = try lookup("LOGGER")
+//				.map { Data($0.utf8) }
+//				.map { try JSONDecoder().decode([String:String].self, from: $0) }
+//			return table?[tName].map{ Logger(named: $0) } ?? Level
+//		}
+//		catch { return Level }
+//		
+//	}
+	
+	fileprivate static func make(key: Any) ->String { "logger.\(key)" }
+	
+	fileprivate static func lookup(_ type: Any.Type) ->String? {
+		
+		let qualified = String(reflecting:type)
+		var parts: [String] = ["logger"] + qualified.split(separator: ".").map { String($0) }
+		while !parts.isEmpty {
+			let key = parts.joined(separator: ".")
+			Log(false, "KEY", key)
+			if let name =  UserDefaults.standard.string(forKey: key) {
+				return name
+			}
+			parts = parts.dropLast()
+		}
+		
+		let name = String(describing: type)
+		return UserDefaults.standard.string(forKey: make(key: name) )
+		
+	}
+	
+	public static func remove(_ type: Any.Type) {
+		let rKey = String(reflecting:type)
+		UserDefaults.standard.set(nil, forKey: make(key: rKey))
+
+		let dKey = String(describing: type)
+		UserDefaults.standard.set(nil, forKey: make(key: dKey))
+	}
+	
+	public static subscript(type: Any.Type) ->Logger {
+		
+		get {
+			return lookup(type).map { Logger(named: $0) } ?? Level
+		}
+		
+		set {
+			let key = String(reflecting:type)
+			let value = String(describing: newValue)
+			UserDefaults.standard.register(defaults: [make(key: key):value])
+		}
+		
+		
+	}
+	
+}
