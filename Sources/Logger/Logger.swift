@@ -197,31 +197,31 @@ extension Publisher {
 	
 	public func debug(_ messages: Any..., logger: Logger = .Level) ->Publishers.HandleEvents<Self> {
 		
-		handleEvents(receiveOutput: { logger.debug( messages + [$0] ) } ) 
+		handleEvents(receiveOutput: { logger.debug(message: messages + [$0]) } ) 
 		
 	}
 
 	public func info(_ messages: Any..., logger: Logger = .Level) ->Publishers.HandleEvents<Self> {
 		
-		handleEvents(receiveOutput: { logger.info( messages + [$0] ) } ) 
+		handleEvents(receiveOutput: { logger.info(message: messages + [$0]) } ) 
 		
 	}
 
 	public func warning(_ messages: Any..., logger: Logger = .Level) ->Publishers.HandleEvents<Self> {
 		
-		handleEvents(receiveOutput: { logger.warning( messages + [$0] ) } ) 
+		handleEvents(receiveOutput: { logger.warning(message: messages + [$0]) } ) 
 		
 	}
 
 	public func error(_ messages: Any..., logger: Logger = .Level) ->Publishers.HandleEvents<Self> {
 		
-		handleEvents(receiveOutput: { logger.error( messages + [$0] ) } ) 
+		handleEvents(receiveOutput: { logger.error(message: messages + [$0]) } ) 
 		
 	}
 
 	public func fatal(_ messages: Any..., logger: Logger = .Level) ->Publishers.HandleEvents<Self> {
 		
-		handleEvents(receiveOutput: { logger.fatal( messages + [$0] ) } ) 
+		handleEvents(receiveOutput: { logger.fatal(message: messages + [$0]) } ) 
 		
 	}
 
