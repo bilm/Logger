@@ -85,31 +85,31 @@ extension Logger: Comparable {
 }
 
 extension Logger {
-	private
+	fileprivate
 	func debug(message:[Any], oslog:OSLog? = nil, function: String = #function) {
 		if case .off = Logger.Level { return }
 		Log(self <= .DEBUG, message:message, tag:"DEBUG", oslog:oslog, oslogtype:.debug, function:function)
 	}
 	
-	private
+	fileprivate
 	func info(message:[Any], oslog:OSLog? = nil, function: String = #function) {
 		if case .off = Logger.Level { return }
 		Log(self <= .INFO, message:message, tag:"INFO", oslog:oslog, oslogtype:.info, function:function)
 	}
 	
-	private
+	fileprivate
 	func warning(message:[Any], oslog:OSLog? = nil, function: String = #function) {
 		if case .off = Logger.Level { return }
 		Log(self <= .WARNING, message:message, tag:"WARNING", oslog:oslog, oslogtype:.`default`, function:function)
 	}
 	
-	private
+	fileprivate
 	func error(message:[Any], oslog:OSLog? = nil, function: String = #function) {
 		if case .off = Logger.Level { return }
 		Log(self <= .ERROR, message:message, tag:"ERROR", oslog:oslog, oslogtype:.error, function:function)
 	}
 	
-	private
+	fileprivate
 	func fatal(message:[Any], oslog:OSLog? = nil, function: String = #function) {
 		if case .off = Logger.Level { return }
 		Log(self <= .FATAL, message:message, tag:"FATAL", oslog:oslog, oslogtype:.fault, function:function)
@@ -144,28 +144,6 @@ extension Logger {
 
 	}
 
-//	public static subscript(type: Any.Type) ->Logger {
-//		
-//		func lookup(_ key: String) ->String? {
-//			ProcessInfo.processInfo.environment[key]
-//			?? UserDefaults.standard.string(forKey: key)
-//		}
-//		
-//		do {
-//			let tName = String(reflecting:type)
-//			if let lggr = lookup("\(tName).logger").map( { Logger(named: $0) } ) {
-//				return lggr
-//			}
-//		
-//			let table = try lookup("LOGGER")
-//				.map { Data($0.utf8) }
-//				.map { try JSONDecoder().decode([String:String].self, from: $0) }
-//			return table?[tName].map{ Logger(named: $0) } ?? Level
-//		}
-//		catch { return Level }
-//		
-//	}
-	
 	fileprivate static func make(key: Any) ->String { "logger.\(key)" }
 	
 	fileprivate static func lookup(_ type: Any.Type) ->String? {
@@ -210,3 +188,43 @@ extension Logger {
 	}
 	
 }
+
+#if canImport(Combine)
+import Combine
+
+@available(iOS 13.0, macOS 15.0, *)
+extension Publisher {
+	
+	public func debug(_ messages: Any..., logger: Logger = .Level) ->Publishers.HandleEvents<Self> {
+		
+		handleEvents(receiveOutput: { logger.debug( messages + [$0] ) } ) 
+		
+	}
+
+	public func info(_ messages: Any..., logger: Logger = .Level) ->Publishers.HandleEvents<Self> {
+		
+		handleEvents(receiveOutput: { logger.info( messages + [$0] ) } ) 
+		
+	}
+
+	public func warning(_ messages: Any..., logger: Logger = .Level) ->Publishers.HandleEvents<Self> {
+		
+		handleEvents(receiveOutput: { logger.warning( messages + [$0] ) } ) 
+		
+	}
+
+	public func error(_ messages: Any..., logger: Logger = .Level) ->Publishers.HandleEvents<Self> {
+		
+		handleEvents(receiveOutput: { logger.error( messages + [$0] ) } ) 
+		
+	}
+
+	public func fatal(_ messages: Any..., logger: Logger = .Level) ->Publishers.HandleEvents<Self> {
+		
+		handleEvents(receiveOutput: { logger.fatal( messages + [$0] ) } ) 
+		
+	}
+
+}
+
+#endif
