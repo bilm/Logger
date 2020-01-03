@@ -195,33 +195,33 @@ import Combine
 @available(iOS 13.0, macOS 15.0, *)
 extension Publisher {
 	
-	public func debug(_ messages: Any..., logger: Logger = .Level) ->Publishers.HandleEvents<Self> {
+	public func debug(_ messages: Any..., logger: Logger = .Level, transform: @escaping (Output)->Any = { $0 }) ->Publishers.HandleEvents<Self> {
 		
-		handleEvents(receiveOutput: { logger.debug(message: messages + [$0]) } ) 
-		
-	}
-
-	public func info(_ messages: Any..., logger: Logger = .Level) ->Publishers.HandleEvents<Self> {
-		
-		handleEvents(receiveOutput: { logger.info(message: messages + [$0]) } ) 
+		handleEvents(receiveOutput: { logger.debug(message: messages + [ transform($0) ]) } ) 
 		
 	}
 
-	public func warning(_ messages: Any..., logger: Logger = .Level) ->Publishers.HandleEvents<Self> {
+	public func info(_ messages: Any..., logger: Logger = .Level, transform: @escaping (Output)->Any = { $0 }) ->Publishers.HandleEvents<Self> {
 		
-		handleEvents(receiveOutput: { logger.warning(message: messages + [$0]) } ) 
-		
-	}
-
-	public func error(_ messages: Any..., logger: Logger = .Level) ->Publishers.HandleEvents<Self> {
-		
-		handleEvents(receiveOutput: { logger.error(message: messages + [$0]) } ) 
+		handleEvents(receiveOutput: { logger.info(message: messages + [ transform($0) ]) } ) 
 		
 	}
 
-	public func fatal(_ messages: Any..., logger: Logger = .Level) ->Publishers.HandleEvents<Self> {
+	public func warning(_ messages: Any..., logger: Logger = .Level, transform: @escaping (Output)->Any = { $0 }) ->Publishers.HandleEvents<Self> {
 		
-		handleEvents(receiveOutput: { logger.fatal(message: messages + [$0]) } ) 
+		handleEvents(receiveOutput: { logger.warning(message: messages + [ transform($0) ]) } ) 
+		
+	}
+
+	public func error(_ messages: Any..., logger: Logger = .Level, transform: @escaping (Output)->Any = { $0 }) ->Publishers.HandleEvents<Self> {
+		
+		handleEvents(receiveOutput: { logger.error(message: messages + [ transform($0) ]) } ) 
+		
+	}
+
+	public func fatal(_ messages: Any..., logger: Logger = .Level, transform: @escaping (Output)->Any = { $0 }) ->Publishers.HandleEvents<Self> {
+		
+		handleEvents(receiveOutput: { logger.fatal(message: messages + [ transform($0) ]) } ) 
 		
 	}
 
