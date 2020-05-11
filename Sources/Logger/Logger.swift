@@ -231,7 +231,7 @@ extension Publisher {
 @available(iOS 13.0, macOS 15.0, *)
 extension Publisher {
 	
-	public func measure(_ label: Any, logger: Logger = .Level, from then: Date = Date() ) ->Publishers.HandleEvents<Self> {
+	public func measure(_ label: Any, logger: Logger = .Level, from then: Date = Date(), tag: String = "MEASURE" ) ->Publishers.HandleEvents<Self> {
 		
 		handleEvents(receiveCompletion: {
 			
@@ -239,10 +239,10 @@ extension Publisher {
 			
 			let now = Date()
 			Log(
-				logger <= Logger.INFO,
+				logger <= Logger.Level,
 				label,
 				now.timeIntervalSinceReferenceDate - then.timeIntervalSinceReferenceDate,
-				tag: "MEASURE"
+				tag: tag
 			)
 			
 		})
