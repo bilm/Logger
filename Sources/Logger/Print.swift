@@ -30,10 +30,24 @@ func Print(_ items: [Any], separator: String = " ", terminator: String = "\n", t
 	let message = items.map{String(reflecting:$0)}.joined(separator: separator)
 	
 	print(prefix, "-", message, terminator:terminator)
-	if let oslog = oslog {
-		os_log("%@", dso:#dsohandle, log:oslog, type:oslogtype, message)
-	}
+	Print(message: message, oslog: oslog, oslogtype: oslogtype)
+
 }
+
+func Print(message: String, oslog:OSLog? = nil, oslogtype:OSLogType = .`default`) {
+	
+	guard let oslog = oslog else { return }
+	os_log("%@", dso:#dsohandle, log:oslog, type:oslogtype, message)
+
+}
+
+//func Print(message: String, oslog:OSLog? = nil, oslogtype:OSLogType = .`default`) {
+//	
+//	guard let oslog = oslog else { return }
+//	os.Logger(oslog).log(level: oslogtype, "\(message)")
+//
+//}
+
 
 ///
 ///	A Formatter for the date on the log messages.

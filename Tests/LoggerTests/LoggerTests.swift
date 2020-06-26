@@ -1,6 +1,6 @@
-import XCTest
-import os.log
 
+
+import XCTest
 @testable import Logger
 
 final class LoggerTests: XCTestCase {
@@ -135,14 +135,6 @@ final class LoggerTests: XCTestCase {
 		("testRequiredLevelSuccess", testRequiredLevelSuccess),
 		("testRequiredLevelFailure", testRequiredLevelFailure),
     ]
-	
-}
-
-extension OSLog {
-	
-	public static func loggerTests(_ category:String) ->OSLog {
-		OSLog(subsystem: "com.lsi.logger.tests", category: category)
-	}
 	
 }
 
