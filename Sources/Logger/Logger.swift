@@ -192,7 +192,7 @@ extension Logger {
 #if canImport(Combine)
 import Combine
 
-@available(iOS 13.0, macOS 15.0, *)
+//@available(iOS 13.0, macOS 15.0, *)
 extension Publisher {
 	
 	public func debug(_ messages: Any..., logger: Logger = .Level, transform: @escaping (Output)->Any = { $0 }) ->Publishers.HandleEvents<Self> {
@@ -228,7 +228,7 @@ extension Publisher {
 }
 
 
-@available(iOS 13.0, macOS 15.0, *)
+//@available(iOS 13.0, macOS 15.0, *)
 extension Publisher {
 	
 	public func measure(_ label: Any, logger: Logger = .Level, from then: Date = Date(), tag: String = "MEASURE" ) ->Publishers.HandleEvents<Self> {
