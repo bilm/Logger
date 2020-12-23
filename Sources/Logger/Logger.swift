@@ -231,7 +231,7 @@ extension Publisher {
 //@available(iOS 13.0, macOS 15.0, *)
 extension Publisher {
 	
-	public func measure(_ label: Any, logger: Logger = .Level, from then: Date = Date(), tag: String = "MEASURE" ) ->Publishers.HandleEvents<Self> {
+	public func measure(_ label: Any, logger: Logger = .INFO, from then: Date = Date(), tag: String = "MEASURE" ) ->Publishers.HandleEvents<Self> {
 		
 		handleEvents(receiveCompletion: {
 			
