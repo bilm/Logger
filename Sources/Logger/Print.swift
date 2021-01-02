@@ -62,12 +62,17 @@ func PrintOSLog(
 
 }
 
-//func Print(message: String, oslog:OSLog? = nil, oslogtype:OSLogType = .`default`) {
-//	
-//	guard let oslog = oslog else { return }
-//	os.Logger(oslog).log(level: oslogtype, "\(message)")
-//
-//}
+@available(iOS 14.0, *)
+func PrintOSLog2(
+	message: String,
+	oslog:OSLog? = nil,
+	oslogtype:OSLogType = .`default`
+) {
+	
+	guard let oslog = oslog else { return }
+	os.Logger(oslog).log(level: oslogtype, "\(message)")
+
+}
 
 
 ///
