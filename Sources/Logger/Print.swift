@@ -62,7 +62,7 @@ func PrintOSLog(
 
 }
 
-@available(iOS 14.0, *)
+@available(OSX 11.0, iOS 14.0, *)
 func PrintOSLog2(
 	message: String,
 	oslog:OSLog? = nil,
