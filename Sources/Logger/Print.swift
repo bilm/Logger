@@ -17,24 +17,45 @@ import os.log
 ///- parameter terminator: the string to end the output
 ///- parameter tag: a tag to add to the prefix between the data and the function
 ///- parameter oslog: (Optional) a OSLog to send the message to
-///- parameter oslogtype: (Optional) the OSLog type of the message
+///- parameter oslogtype: the OSLog type of the message
+///- parameter reflecting: by default, uses `String(reflecting:)` to convert the items to Strings
+///- parameter prefixed: by default, has a prefix of _"[date]tag «function» - "_
 ///- parameter function: the function being called from; defaults to the actual one
 ///
-///- note: has a prefix of _"[date]tag «function» - "_  
-///- note: uses `String(reflecting:)` to convert the items to Strings
-///
 internal
-func Print(_ items: [Any], separator: String = " ", terminator: String = "\n", tag:String = "", oslog:OSLog? = nil, oslogtype:OSLogType = .`default`, function: String = #function)
-{
-	let prefix = "[\(Formatter.pretty(Date()))]\(tag) «\(function)»"
-	let message = items.map{String(reflecting:$0)}.joined(separator: separator)
+func Print(
+	_ items: [Any],
+	separator: String = " ",
+	terminator: String = "\n",
+	tag:String = "",
+	oslog:OSLog? = nil,
+	oslogtype:OSLogType = .`default`,
+	reflecting: Bool = true,
+	prefixed: Bool = true,
+	function: String = #function
+) {
 	
-	print(prefix, "-", message, terminator:terminator)
-	Print(message: message, oslog: oslog, oslogtype: oslogtype)
+	let message = reflecting
+		? items.map{ String(reflecting: $0) }.joined(separator: separator)
+		: items.map{ String(describing: $0) }.joined(separator: separator)
+	
+	if prefixed {
+	
+		let prefix = "[\(Formatter.pretty(Date()))]\(tag) «\(function)»"
+		print(prefix, "-", message, terminator:terminator)
+		
+	}
+	else { print(message, terminator:terminator) }
+	
+	PrintOSLog(message: message, oslog: oslog, oslogtype: oslogtype)
 
 }
 
-func Print(message: String, oslog:OSLog? = nil, oslogtype:OSLogType = .`default`) {
+func PrintOSLog(
+	message: String,
+	oslog:OSLog? = nil,
+	oslogtype:OSLogType = .`default`
+) {
 	
 	guard let oslog = oslog else { return }
 	os_log("%@", dso:#dsohandle, log:oslog, type:oslogtype, message)
@@ -52,7 +73,7 @@ func Print(message: String, oslog:OSLog? = nil, oslogtype:OSLogType = .`default`
 ///
 ///	A Formatter for the date on the log messages.
 ///
-private
+fileprivate
 class Formatter
 {
 	private
@@ -79,7 +100,7 @@ class Formatter
 /// A confiment Class to synchronize access to the Formatter
 ///
 final
-public
+fileprivate
 class Moat<Value>
 {
 	private var value : Value
