@@ -7,7 +7,7 @@ let package = Package(
 	name: "Logger",
 	platforms: [ .iOS(.v13), .macOS(.v10_15) ],
 	products: [
-		.library(name: "Logger", type: .dynamic, targets: ["Logger"]),
+		.library(name: "Logger", targets: ["Logger"]),
 	],
 	targets: [
 		.target( name: "Logger", dependencies: []),
