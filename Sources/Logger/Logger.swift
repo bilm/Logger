@@ -10,9 +10,11 @@ import Foundation
 import os.log
 
 public
-enum Logger:Int {
+enum Logger: Int {
+	
 	case all = 0
 	case DEBUG
+	case MEASURE
 	case INFO
 	case WARNING
 	case ERROR
@@ -20,9 +22,11 @@ enum Logger:Int {
 	case off
 	
 	public static var Level = all
+	
 }
 
 extension Logger {
+	
 	public
 	static
 	func debug(_ message:Any..., oslog:OSLog? = nil, function: String = #function) {
@@ -34,6 +38,17 @@ extension Logger {
 	}
 	
 	
+	public
+	static
+	func measure(_ message:Any..., oslog:OSLog? = nil, function: String = #function) {
+		Level.measure(message:message, oslog:oslog, function:function)
+	}
+	public
+	func measure(_ message:Any..., oslog:OSLog? = nil, function: String = #function) {
+		measure(message:message, oslog:oslog, function:function)
+	}
+	
+
 	public
 	static
 	func info(_ message:Any..., oslog:OSLog? = nil, function: String = #function) {
@@ -80,15 +95,24 @@ extension Logger {
 }
 
 extension Logger: Comparable {
+	
 	public static func ==(lhs:Logger,rhs:Logger) ->Bool { return lhs.rawValue == rhs.rawValue }
 	public static func <(lhs:Logger,rhs:Logger) ->Bool { return lhs.rawValue < rhs.rawValue }
+	
 }
 
 extension Logger {
+	
 	fileprivate
 	func debug(message:[Any], oslog:OSLog? = nil, function: String = #function) {
 		if case .off = Logger.Level { return }
 		Log(self <= .DEBUG, message:message, tag:"DEBUG", oslog:oslog, oslogtype:.debug, function:function)
+	}
+	
+	fileprivate
+	func measure(message:[Any], oslog:OSLog? = nil, function: String = #function) {
+		if case .off = Logger.Level { return }
+		Log(self <= .MEASURE, message:message, tag:"MEASURE", oslog:oslog, oslogtype:.info, function:function)
 	}
 	
 	fileprivate
@@ -134,6 +158,7 @@ extension Logger {
 		switch name.uppercased() {
 		case "ALL":		self = .all
 		case "DEBUG":	self = .DEBUG
+		case "MEASURE":	self = .MEASURE
 		case "INFO":	self = .INFO
 		case "WARNING":	self = .WARNING
 		case "ERROR":	self = .ERROR
@@ -231,19 +256,12 @@ extension Publisher {
 //@available(iOS 13.0, macOS 15.0, *)
 extension Publisher {
 	
-	public func measure(_ label: Any, logger: Logger = .Level, from then: Date = Date(), tag: String = "MEASURE" ) ->Publishers.HandleEvents<Self> {
+	public func measure(_ messages: Any..., logger: Logger = .Level, from then: Date = Date(), tag: String = "MEASURE" ) ->Publishers.HandleEvents<Self> {
 		
 		handleEvents(receiveCompletion: {
 			
 			_ in
-			
-			let now = Date()
-			Log(
-				logger <= .DEBUG,
-				label,
-				now.timeIntervalSinceReferenceDate - then.timeIntervalSinceReferenceDate,
-				tag: tag
-			)
+			logger.measure(message: messages + [ -then.timeIntervalSinceNow ])
 			
 		})
 		
