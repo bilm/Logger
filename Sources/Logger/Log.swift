@@ -9,7 +9,7 @@
 //
 
 import Foundation
-import os.log
+import os
 
 ///
 /// main Logging function

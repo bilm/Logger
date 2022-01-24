@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import os.log
+import os
 
 ///
 /// Internal "Print" interface
@@ -51,19 +51,8 @@ func Print(
 
 }
 
-func PrintOSLog(
-	message: String,
-	oslog:OSLog? = nil,
-	oslogtype:OSLogType = .`default`
-) {
-	
-	guard let oslog = oslog else { return }
-	os_log("%@", dso:#dsohandle, log:oslog, type:oslogtype, message)
-
-}
-
 @available(OSX 11.0, iOS 14.0, *)
-func PrintOSLog2(
+func PrintOSLog(
 	message: String,
 	oslog:OSLog? = nil,
 	oslogtype:OSLogType = .`default`
