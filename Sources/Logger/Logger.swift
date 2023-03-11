@@ -10,7 +10,7 @@ import Foundation
 import os
 
 public
-enum Logger: Int {
+enum Logger: Int, Sendable {
 	
 	case all = 0
 	case DEBUG
