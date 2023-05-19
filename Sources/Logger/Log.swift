@@ -33,21 +33,20 @@ import os
 /// - seealso: Print(_:separator:terminator:tag:function:)
 ///
 public
-func Log(
-	_ conditional:  @autoclosure() -> Bool,
-	_ message: Any...,
-	separator: String = " ",
-	terminator: String = "\n",
-	tag:String = "",
-	oslog:OSLog? = nil,
-	oslogtype:OSLogType = .`default`,
-	reflecting: Bool = true,
-	prefixed: Bool = true,
-	function: String = #function
-	)
-{
+func Log(_ conditional:  @autoclosure() -> Bool, _ message: Any..., separator: String = " ", terminator: String = "\n", tag:String = "", oslog:OSLog? = nil, oslogtype:OSLogType = .`default`, reflecting: Bool = true, prefixed: Bool = true, function: String = #function) {
+	
 	guard conditional() else { return }
-	Print(message, separator: separator, terminator: terminator, tag:tag, oslog:oslog, oslogtype:oslogtype, reflecting: reflecting, prefixed: prefixed, function:function)
+	Print(
+		message,
+		separator: separator,
+		terminator: terminator,
+		tag:tag, oslog:oslog,
+		oslogtype:oslogtype,
+		reflecting: reflecting,
+		prefixed: prefixed,
+		function:function
+	)
+	
 }
 
 ///
@@ -72,21 +71,21 @@ func Log(
 /// - seealso: Print(_:separator:terminator:tag:function:)
 ///
 public
-func Log(
-	_ conditional:  @autoclosure() -> Bool,
-	message: [Any],
-	separator: String = " ",
-	terminator: String = "\n",
-	tag:String = "",
-	oslog:OSLog? = nil,
-	oslogtype:OSLogType = .`default`,
-	reflecting: Bool = true,
-	prefixed: Bool = true,
-	function: String = #function
-	)
-{
+func Log(_ conditional:  @autoclosure() -> Bool, message: [Any], separator: String = " ", terminator: String = "\n", tag:String = "", oslog:OSLog? = nil, oslogtype:OSLogType = .`default`, reflecting: Bool = true, prefixed: Bool = true, function: String = #function) {
+	
 	guard conditional() else { return }
-	Print(message, separator: separator, terminator: terminator, tag:tag, oslog:oslog, oslogtype:oslogtype, reflecting: reflecting, prefixed: prefixed, function:function)
+	Print(
+		message,
+		separator: separator,
+		terminator: terminator,
+		tag:tag,
+		oslog:oslog,
+		oslogtype:oslogtype,
+		reflecting: reflecting,
+		prefixed: prefixed,
+		function:function
+	)
+	
 }
 
 ///
@@ -102,12 +101,10 @@ func Log(
 ///```
 ///
 public
-func Label(
-	_ message: Any...,
-	function: String = #function
-	)
-{
+func Label(_ message: Any..., function: String = #function) {
+	
 	Print(message, function:function)
+	
 }
 
 ///
@@ -130,14 +127,15 @@ func Label(
 /// ```
 ///
 public
-func Log(
-	_ error: Error?,
-	message: Any? = nil,
-	oslog:OSLog? = nil,
-	oslogtype:OSLogType = .`default`,
-	function: String = #function)
-{
+func Log(_ error: Error?, message: Any? = nil, oslog:OSLog? = nil, oslogtype:OSLogType = .`default`, function: String = #function) {
+	
 	guard let error = error else { return }
-	Print([message ?? (error as NSError).localizedDescription], oslog:oslog, oslogtype:oslogtype, function:function)
+	Print(
+		[message ?? (error as NSError).localizedDescription],
+		oslog:oslog,
+		oslogtype:oslogtype,
+		function:function
+	)
+	
 }
 

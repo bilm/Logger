@@ -23,17 +23,7 @@ import os
 ///- parameter function: the function being called from; defaults to the actual one
 ///
 internal
-func Print(
-	_ items: [Any],
-	separator: String = " ",
-	terminator: String = "\n",
-	tag:String = "",
-	oslog:OSLog? = nil,
-	oslogtype:OSLogType = .`default`,
-	reflecting: Bool = true,
-	prefixed: Bool = true,
-	function: String = #function
-) {
+func Print(_ items: [Any], separator: String = " ", terminator: String = "\n", tag: String = "", oslog: OSLog? = nil, oslogtype: OSLogType = .`default`, reflecting: Bool = true, prefixed: Bool = true, function: String = #function) {
 	
 	let message = reflecting
 		? items.map{ String(reflecting: $0) }.joined(separator: separator)
@@ -41,7 +31,7 @@ func Print(
 	
 	if prefixed {
 	
-		let prefix = "[\(Formatter.pretty(Date()))]\(tag) «\(function)»"
+		let prefix = "[\(Date().formatted(.iso8601))]\(tag) «\(function)»"
 		print(prefix, "-", message, terminator:terminator)
 		
 	}
@@ -52,68 +42,9 @@ func Print(
 }
 
 @available(OSX 11.0, iOS 14.0, *)
-func PrintOSLog(
-	message: String,
-	oslog:OSLog? = nil,
-	oslogtype:OSLogType = .`default`
-) {
+func PrintOSLog(message: String, oslog: OSLog? = nil, oslogtype: OSLogType = .`default`) {
 	
 	guard let oslog = oslog else { return }
 	os.Logger(oslog).log(level: oslogtype, "\(message)")
 
-}
-
-
-///
-///	A Formatter for the date on the log messages.
-///
-fileprivate
-class Formatter
-{
-	private
-	static
-	let formatter: DateFormatter = {
-		let dateFormatter = DateFormatter()
-		dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss.SSS"
-		return dateFormatter
-	}()
-	
-	private
-	static
-	let moat = Moat(formatter)
-	
-	static
-	func pretty(_ date: Date) -> String
-	{
-		return moat.sync { $0.string(from: date) }
-	}
-}
-
-
-///
-/// A confiment Class to synchronize access to the Formatter
-///
-final
-fileprivate
-class Moat<Value>
-{
-	private var value : Value
-	private let lock:Any = Data()
-	
-	required 
-	public 
-	init(_ value: Value) {
-		self.value = value
-	}
-	
-	public 
-	func sync<S>(_ block : (inout Value) throws -> S) rethrows -> S {
-		objc_sync_enter(lock)
-		defer { objc_sync_exit(lock) }
-		var copy = value
-		defer { value = copy }
-		
-		return try block(&copy)
-	}
-	
 }

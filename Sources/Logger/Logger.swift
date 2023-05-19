@@ -29,67 +29,186 @@ extension Logger {
 	
 	public
 	static
-	func debug(_ message:Any..., oslog:OSLog? = nil, function: String = #function) {
-		Level.debug(message:message, oslog:oslog, function:function)
+	func debug(_ message:Any..., separator: String = " ", terminator: String = "\n", oslog:OSLog? = nil, reflecting: Bool = true, prefixed: Bool = true, function: String = #function) {
+		
+		Level.debug(
+			message:message,
+			separator: separator,
+			terminator: terminator,
+			oslog:oslog,
+			reflecting: reflecting,
+			prefixed: prefixed,
+			function:function
+		)
+		
 	}
 	public
-	func debug(_ message:Any..., oslog:OSLog? = nil, function: String = #function) {
-		debug(message:message, oslog:oslog, function:function)
+	func debug(_ message:Any..., separator: String = " ", terminator: String = "\n", oslog:OSLog? = nil, reflecting: Bool = true, prefixed: Bool = true, function: String = #function) {
+		
+		debug(
+			message:message,
+			separator: separator,
+			terminator: terminator,
+			oslog:oslog,
+			reflecting: reflecting,
+			prefixed: prefixed,
+			function:function
+		)
 	}
 	
 	
 	public
 	static
-	func measure(_ message:Any..., oslog:OSLog? = nil, function: String = #function) {
-		Level.measure(message:message, oslog:oslog, function:function)
+	func measure(_ message:Any..., separator: String = " ", terminator: String = "\n", oslog:OSLog? = nil, reflecting: Bool = true, prefixed: Bool = true, function: String = #function) {
+		
+		Level.measure(
+			message:message,
+			separator: separator,
+			terminator: terminator,
+			oslog:oslog,
+			reflecting: reflecting,
+			prefixed: prefixed,
+			function:function
+		)
+		
 	}
 	public
-	func measure(_ message:Any..., oslog:OSLog? = nil, function: String = #function) {
-		measure(message:message, oslog:oslog, function:function)
+	func measure(_ message:Any..., separator: String = " ", terminator: String = "\n", oslog:OSLog? = nil, reflecting: Bool = true, prefixed: Bool = true, function: String = #function) {
+		
+		measure(
+			message:message,
+			separator: separator,
+			terminator: terminator,
+			oslog:oslog,
+			reflecting: reflecting,
+			prefixed: prefixed,
+			function:function
+		)
+		
 	}
 	
 
 	public
 	static
-	func info(_ message:Any..., oslog:OSLog? = nil, function: String = #function) {
-		Level.info(message:message, oslog:oslog, function:function)
+	func info(_ message:Any..., separator: String = " ", terminator: String = "\n", oslog:OSLog? = nil, reflecting: Bool = true, prefixed: Bool = true, function: String = #function) {
+		
+		Level.info(
+			message:message,
+			separator: separator,
+			terminator: terminator,
+			oslog:oslog,
+			reflecting: reflecting,
+			prefixed: prefixed,
+			function:function
+		)
+		
 	}
 	public
-	func info(_ message:Any..., oslog:OSLog? = nil, function: String = #function) {
-		info(message:message, oslog:oslog, function:function)
-	}
-	
-	
-	public
-	static
-	func warning(_ message:Any..., oslog:OSLog? = nil, function: String = #function) {
-		Level.warning(message:message, oslog:oslog, function:function)
-	}
-	public
-	func warning(_ message:Any..., oslog:OSLog? = nil, function: String = #function) {
-		warning(message:message, oslog:oslog, function:function)
-	}
-	
-	
-	public
-	static
-	func error(_ message:Any..., oslog:OSLog? = nil, function: String = #function) {
-		Level.error(message:message, oslog:oslog, function:function)
-	}
-	public
-	func error(_ message:Any..., oslog:OSLog? = nil, function: String = #function) {
-		error(message:message, oslog:oslog, function:function)
+	func info(_ message:Any..., separator: String = " ", terminator: String = "\n", oslog:OSLog? = nil, reflecting: Bool = true, prefixed: Bool = true, function: String = #function) {
+		
+		info(
+			message:message,
+			separator: separator,
+			terminator: terminator,
+			oslog:oslog,
+			reflecting: reflecting,
+			prefixed: prefixed,
+			function:function
+		)
+		
 	}
 	
 	
 	public
 	static
-	func fatal(_ message:Any..., oslog:OSLog? = nil, function: String = #function) {
-		Level.fatal(message:message, oslog:oslog, function:function)
+	func warning(_ message:Any..., separator: String = " ", terminator: String = "\n", oslog:OSLog? = nil, reflecting: Bool = true, prefixed: Bool = true, function: String = #function) {
+		
+		Level.warning(
+			message:message,
+			separator: separator,
+			terminator: terminator,
+			oslog:oslog,
+			reflecting: reflecting,
+			prefixed: prefixed,
+			function:function
+		)
+		
 	}
 	public
-	func fatal(_ message:Any..., oslog:OSLog? = nil, function: String = #function) {
-		fatal(message:message, oslog:oslog, function:function)
+	func warning(_ message:Any..., separator: String = " ", terminator: String = "\n", oslog:OSLog? = nil, reflecting: Bool = true, prefixed: Bool = true, function: String = #function) {
+		
+		warning(
+			message:message,
+			separator: separator,
+			terminator: terminator,
+			oslog:oslog,
+			reflecting: reflecting,
+			prefixed: prefixed,
+			function:function
+		)
+		
+	}
+	
+	
+	public
+	static
+	func error(_ message:Any..., separator: String = " ", terminator: String = "\n", oslog:OSLog? = nil, reflecting: Bool = true, prefixed: Bool = true, function: String = #function) {
+		
+		Level.error(
+			message:message,
+			separator: separator,
+			terminator: terminator,
+			oslog:oslog,
+			reflecting: reflecting,
+			prefixed: prefixed,
+			function:function
+		)
+		
+	}
+	public
+	func error(_ message:Any..., separator: String = " ", terminator: String = "\n", oslog:OSLog? = nil, reflecting: Bool = true, prefixed: Bool = true, function: String = #function) {
+		
+		error(
+			message:message,
+			separator: separator,
+			terminator: terminator,
+			oslog:oslog,
+			reflecting: reflecting,
+			prefixed: prefixed,
+			function:function
+		)
+		
+	}
+	
+	
+	public
+	static
+	func fatal(_ message:Any..., separator: String = " ", terminator: String = "\n", oslog:OSLog? = nil, reflecting: Bool = true, prefixed: Bool = true, function: String = #function) {
+		
+		Level.fatal(
+			message:message,
+			separator: separator,
+			terminator: terminator,
+			oslog:oslog,
+			reflecting: reflecting,
+			prefixed: prefixed,
+			function:function
+		)
+		
+	}
+	public
+	func fatal(_ message:Any..., separator: String = " ", terminator: String = "\n", oslog:OSLog? = nil, reflecting: Bool = true, prefixed: Bool = true, function: String = #function) {
+		
+		fatal(
+			message:message,
+			separator: separator,
+			terminator: terminator,
+			oslog:oslog,
+			reflecting: reflecting,
+			prefixed: prefixed,
+			function:function
+		)
+		
 	}
 	
 }
@@ -104,39 +223,117 @@ extension Logger: Comparable {
 extension Logger {
 	
 	fileprivate
-	func debug(message:[Any], oslog:OSLog? = nil, function: String = #function) {
+	func debug(message:[Any], separator: String = " ", terminator: String = "\n", oslog:OSLog? = nil, reflecting: Bool = true, prefixed: Bool = true, function: String = #function) {
+		
 		if case .off = Logger.Level { return }
-		Log(self <= .DEBUG, message:message, tag:"DEBUG", oslog:oslog, oslogtype:.debug, function:function)
+		Log(
+			self <= .DEBUG,
+			message: message,
+			separator: separator,
+			terminator: terminator,
+			tag: "DEBUG",
+			oslog: oslog,
+			oslogtype: .debug,
+			reflecting: reflecting,
+			prefixed: prefixed,
+			function: function
+		)
+		
 	}
 	
 	fileprivate
-	func measure(message:[Any], oslog:OSLog? = nil, function: String = #function) {
+	func measure(message:[Any], separator: String = " ", terminator: String = "\n", oslog:OSLog? = nil, reflecting: Bool = true, prefixed: Bool = true, function: String = #function) {
+		
 		if case .off = Logger.Level { return }
-		Log(self <= .MEASURE, message:message, tag:"MEASURE", oslog:oslog, oslogtype:.info, function:function)
+		Log(
+			self <= .MEASURE,
+			message: message,
+			separator: separator,
+			terminator: terminator,
+			tag: "MEASURE",
+			oslog: oslog,
+			oslogtype: .debug,
+			reflecting: reflecting,
+			prefixed: prefixed,
+			function: function
+		)
+		
 	}
 	
 	fileprivate
-	func info(message:[Any], oslog:OSLog? = nil, function: String = #function) {
+	func info(message:[Any], separator: String = " ", terminator: String = "\n", oslog:OSLog? = nil, reflecting: Bool = true, prefixed: Bool = true, function: String = #function) {
+		
 		if case .off = Logger.Level { return }
-		Log(self <= .INFO, message:message, tag:"INFO", oslog:oslog, oslogtype:.info, function:function)
+		Log(
+			self <= .INFO,
+			message: message,
+			separator: separator,
+			terminator: terminator,
+			tag: "INFO",
+			oslog: oslog,
+			oslogtype: .debug,
+			reflecting: reflecting,
+			prefixed: prefixed,
+			function: function
+		)
+		
 	}
 	
 	fileprivate
-	func warning(message:[Any], oslog:OSLog? = nil, function: String = #function) {
+	func warning(message:[Any], separator: String = " ", terminator: String = "\n", oslog:OSLog? = nil, reflecting: Bool = true, prefixed: Bool = true, function: String = #function) {
+		
 		if case .off = Logger.Level { return }
-		Log(self <= .WARNING, message:message, tag:"WARNING", oslog:oslog, oslogtype:.`default`, function:function)
+		Log(
+			self <= .WARNING,
+			message: message,
+			separator: separator,
+			terminator: terminator,
+			tag: "WARNING",
+			oslog: oslog,
+			oslogtype: .debug,
+			reflecting: reflecting,
+			prefixed: prefixed,
+			function: function
+		)
+		
 	}
 	
 	fileprivate
-	func error(message:[Any], oslog:OSLog? = nil, function: String = #function) {
+	func error(message:[Any], separator: String = " ", terminator: String = "\n", oslog:OSLog? = nil, reflecting: Bool = true, prefixed: Bool = true, function: String = #function) {
+		
 		if case .off = Logger.Level { return }
-		Log(self <= .ERROR, message:message, tag:"ERROR", oslog:oslog, oslogtype:.error, function:function)
+		Log(
+			self <= .ERROR,
+			message: message,
+			separator: separator,
+			terminator: terminator,
+			tag: "ERROR",
+			oslog: oslog,
+			oslogtype: .debug,
+			reflecting: reflecting,
+			prefixed: prefixed,
+			function: function
+		)
+		
 	}
 	
 	fileprivate
-	func fatal(message:[Any], oslog:OSLog? = nil, function: String = #function) {
+	func fatal(message:[Any], separator: String = " ", terminator: String = "\n", oslog:OSLog? = nil, reflecting: Bool = true, prefixed: Bool = true, function: String = #function) {
+		
 		if case .off = Logger.Level { return }
-		Log(self <= .FATAL, message:message, tag:"FATAL", oslog:oslog, oslogtype:.fault, function:function)
+		Log(
+			self <= .FATAL,
+			message: message,
+			separator: separator,
+			terminator: terminator,
+			tag: "FATAL",
+			oslog: oslog,
+			oslogtype: .debug,
+			reflecting: reflecting,
+			prefixed: prefixed,
+			function: function
+		)
+		
 	}
 	
 }
@@ -145,8 +342,10 @@ extension Logger {
 	
 	public
 	func requires(_ logger:Logger, closure:(Logger) -> Void) {
+		
 		guard logger <= self else { return }
 		closure(self)
+		
 	}
 	
 }
